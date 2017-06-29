@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar  color="ligh-green">
+    <ion-title >新鲜事</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="oepenRe()">
+      <ion-icon name='ios-create-outline'></ion-icon>
+    </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)" style="border: none">
+    <ion-refresher-content refreshingSpinner="circles" refreshingText="刷新中" pullingIcon="none"></ion-refresher-content>
+  </ion-refresher>
+  <ion-fab right bottom>
+    <button ion-fab class="pop-in" (click)="gotoTop()">
+        <ion-icon name='md-arrow-round-up'></ion-icon>
+      </button>
+  </ion-fab>
+  <div *ngIf="hasErr">
+    <div class="loading" (click)="initData()" align="center">
+      <img src="assets/img/icon/404.png" style="width:50%">
+    </div>
+  </div>
+  <div *ngIf="!hasErr">
+    <div *ngIf="!dataFinish" align="center" class="loading">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </div>
+    <div *ngIf="dataFinish">
+        <ion-card *ngFor="let post of posts">
+          <ion-item>
+            <ion-avatar item-left>
+              <img [src]="post.userImage" (click)="userdetail(post.personID)">
+            </ion-avatar>
+            <h4 id="profile-name">{{post.personNickname}}</h4>
+          </ion-item>
+          <img *ngIf="post.image !== null" [src]="post.image" (click)="openModal(post.image)">
+          <ion-card-content>
+            <p *ngIf="post.content !== null" >{{post.content}}</p>
+          </ion-card-content>
+          <ion-row>
+            <ion-col center text-center>
+              <h4 color="font1">
+                {{post.publishDateTime}}
+              </h4>
+            </ion-col>
+            <ion-col center text-center>
+              <button ion-button  clear  color="font1" small icon-left (click)="comment(post.id)">
+                          <ion-icon name='text'></ion-icon>
+                          {{post.messageNumber}}
+                        </button>
+            </ion-col>
+            <ion-col center text-center>
+              <button *ngIf="isLike !== post.id && hasLike " ion-button color="font1" clear small icon-left (click)="likeAdd(post)">
+                   <ion-icon name='md-thumbs-up'></ion-icon>
+                   {{post.likes}} 
+              </button>
+               <button *ngIf="isLike !== post.id && !hasLike " ion-button color="font1" clear small icon-left (click)="likeAdd(post)">
+                   <ion-icon name='md-thumbs-up'></ion-icon>
+                   {{post.likes}} 
+              </button>
+              <button  *ngIf="isLike == post.id && hasLike  " ion-button color="danger" clear small icon-left (click)="likesRe(post)">
+                   <ion-icon name='md-thumbs-up'></ion-icon>
+                  {{post.likes+1}} 
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+        <ion-infinite-scroll *ngIf="hasMore" (ionInfinite)="doInfinite($event)">
+          <ion-infinite-scroll-content loadingSpinner="circles" loadingText="加载更多...">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </div>
+  </div>
+</ion-content>

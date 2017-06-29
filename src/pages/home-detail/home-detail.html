@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-navbar color="ligh-green">
+    <ion-title>
+      动态详情
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card *ngIf="posts">
+    <ion-item>
+      <ion-avatar item-left>
+        <img [src]="posts.userImage">
+      </ion-avatar>
+      <h5 id="profile-name">{{posts.personNickname}}</h5>
+    </ion-item>
+    <img *ngIf="posts.image !== null" [src]="posts.image" (click)="imageTapped(posts.image)">
+    <ion-card-content>
+      <p *ngIf="posts.content !== null">{{posts.content}}</p>
+    </ion-card-content>
+    <ion-row>
+      <ion-col center text-center>
+        <h4 color="font1">
+          {{posts.publishDateTime}}
+        </h4>
+      </ion-col>
+      <ion-col center text-center>
+        <p *ngIf="isNumber == posts.messageNumber" color="font1">
+          评论({{posts.messageNumber}})
+        </p>
+        <p *ngIf="isNumber !== posts.messageNumber" color="font1">
+          评论({{isNumber}})
+        </p>
+      </ion-col>
+      <ion-col center text-center>
+        <p color="font1">
+          赞 {{posts.likes}}
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <div *ngFor="let message of messages">
+    <div id="image">
+      <img src="{{message.userImage}}">
+    </div>
+    <div class="like">
+      <button *ngIf="isLike !== message.id" ion-button color="primary" clear small icon-left (click)="likeAdd(message)">
+                   <ion-icon name='md-thumbs-up'></ion-icon>
+                   {{message.likes}} 
+              </button>
+      <button *ngIf="isLike == message.id" ion-button color="danger" clear small icon-left (click)="likesRe(message)">
+                   <ion-icon name='md-thumbs-up'></ion-icon>
+                   {{like}} 
+              </button>
+    </div>
+    <p id="comment-name">{{message.personNickname}}</p>
+    <p id="comment-time">{{message.messagestime}} </p>
+    <div id="content">
+      <p>{{message.content}}</p>
+    </div>
+    <hr/>
+</div>
+  <div *ngIf="isMessage && comment">
+    <div id="image">
+      <img src="{{comment.userImage}}">
+    </div>
+    <div class="like">
+      <button ion-button color="danger" clear small icon-left (click)="likesRe(post)">
+                   <ion-icon name='thumbs-up'></ion-icon>
+                    {{comment.likes}}
+             </button>
+    </div>
+    <p id="comment-name">{{comment.nickname}}</p>
+    <p id="comment-time">{{comment.messagestime}} </p>
+    <div id="content">
+      <p>{{comment.content}}</p>
+    </div>
+  </div>
+  <div style="height: 30px"> </div>
+</ion-content>
+<ion-footer *ngIf="posts">
+  <form [formGroup]="messageForm" (submit)="send(chatBox)" novalidate>
+    <ion-item>
+      <ion-input *ngIf="haslogin" formControlName="message" [(ngModel)]="chatBox" placeholder="@ {{posts.personNickname}}"></ion-input>
+      <ion-input *ngIf="!haslogin" formControlName="message" [(ngModel)]="chatBox" placeholder="请登录"></ion-input>
+      <button ion-button clear [disabled]="!haslogin" (click)="send(chatBox)" item-right><ion-icon class="footer-btn" name="send"></ion-icon></button>
+    </ion-item>
+  </form>
+</ion-footer>

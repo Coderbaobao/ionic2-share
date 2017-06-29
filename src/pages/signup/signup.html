@@ -1,0 +1,38 @@
+<ion-header>
+	<ion-navbar color="ligh-green">
+	 <ion-title >注册</ion-title>
+	 <ion-buttons end >
+      <button ion-button (click)="startApp()" color="primary">跳过</button>
+    </ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="login-page">
+
+	<form #signupForm="ngForm" novalidate>
+		<ion-list >
+			<ion-item>
+				<ion-label stacked color="primary">电话号码</ion-label>
+				<ion-input [(ngModel)]="signup.uumbers" name="uumbers" type="text" #uumbers="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="uumbers.valid || submitted == false" color="danger" padding-left>
+				电话号码是必需的
+			</p>
+
+			<ion-item>
+				<ion-label stacked color="primary">密码</ion-label>
+				<ion-input [(ngModel)]="signup.password" name="password" type="password" #password="ngModel" required>
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="password.valid || submitted == false" color="danger" padding-left>
+				密码是必需的
+			</p>
+		</ion-list>
+
+		<div padding>
+			<button ion-button (click)="onSignup(signupForm)" type="submit" block>注册</button>
+		</div>
+	</form>
+
+</ion-content>

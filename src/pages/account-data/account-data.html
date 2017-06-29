@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color="ligh-green">
+    <ion-title>用户资料</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding >
+<ion-list *ngIf="users">
+      <button ion-item (click)="presentActionSheet()"><p>更新头像</p>
+           <ion-avatar item-right>
+               <img src="{{users.userImage}}">
+            </ion-avatar></button>
+      <button ion-item (click)="changeUsername()"><p>更改用户名</p>
+           <div item-right>
+              <p>{{users.nickname}}</p>
+            </div></button>
+      <button ion-item (click)="changeDescriptione()"><p>更改签名</p>
+            <div item-right>
+              <p>{{users.description}}</p>
+            </div></button>
+ </ion-list>
+</ion-content>

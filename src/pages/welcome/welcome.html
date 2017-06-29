@@ -1,0 +1,33 @@
+<ion-header no-border>
+  <ion-navbar>
+    <ion-buttons end *ngIf="showSkip">
+      <button ion-button (click)="startApp()" color="primary">跳过</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-bounce>
+  <ion-slides (ionSlideWillChange)="onSlideChangeStart($event)" pager>
+
+    <ion-slide>
+      <img src="assets/img/slidebox/ica-slidebox-img-1.png" class="slide-image"/>
+      <h2 class="slide-title">
+        欢迎使用 <b>校园微享app</b>
+      </h2>
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/img/slidebox/ica-slidebox-img-2.png" class="slide-image"/> 
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/img/slidebox/ica-slidebox-img-3.png" class="slide-image"/>
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/img/slidebox/ica-slidebox-img-4.png" class="slide-image"/>
+      <button ion-button icon-right large clear (click)="startApp()">
+        开始使用
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

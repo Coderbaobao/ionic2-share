@@ -1,0 +1,17 @@
+
+<ion-header>
+  <ion-navbar  color="ligh-green">
+    <ion-title>关注</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+  <ion-list *ngFor="let item of users">
+    <ion-item (click)="goDetail(item.personID)" >
+      <ion-avatar item-left>
+        <img [src]="item.userImage" alt="{{item.personNickname}}" />
+      </ion-avatar>
+      <h2 item-title>{{item.personNickname}}</h2>
+    </ion-item>
+  </ion-list>
+</ion-content>

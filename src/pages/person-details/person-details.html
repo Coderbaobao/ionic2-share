@@ -1,0 +1,78 @@
+<ion-content padding class="transparent-header">
+  <ion-header>
+    <ion-navbar transparent>
+    </ion-navbar>
+  </ion-header>
+   <ion-fab right bottom>
+      <button ion-fab class="pop-in" (click)="gotoTop()">
+        <ion-icon name='md-arrow-round-up'></ion-icon>
+       </button>
+      </ion-fab> 
+  <div id="profile-bg" *ngIf="istheme" [ngStyle]="{'background-image': 'url(' + imageUrl_1 +')'}"></div>
+  <div id="profile-bg" *ngIf="!istheme" [ngStyle]="{'background-image': 'url(' + imageUrl_2 +')'}"></div>
+    <div id="content"  *ngIf="users">
+      <div id="profile-info" padding>
+        <img id="profile-image" [src]="users.userImage">
+        <h3 >{{users.nickname}}</h3>
+        <p class="profile-description">{{users.description}}</p> 
+        <div *ngIf="hasfollowing">
+          <button ion-button *ngIf="!following" small color="purple" (click)="follow(users.id)">关注</button>
+          <button ion-button *ngIf="following" class="follow-button" small color="purple" (click)="followbefor(users.id)">已关注<ion-icon name="checkmark"></ion-icon></button>
+        </div> 
+      </div>
+      <hr/>
+      <ion-row class="profile-numbers">
+        <ion-col width-50>
+          <p>关注</p>
+          <span>{{users.concern}}</span>
+        </ion-col>
+        <ion-col width-50>
+          <p>点赞</p>
+          <span>{{users.likes}}</span>
+        </ion-col>
+      </ion-row>
+      <div id="posts" *ngFor="let post of posts">
+        <ion-card >
+          <ion-item>
+            <ion-avatar item-left>
+              <img [src]="users.userImage">
+            </ion-avatar>
+           <ion-icon *ngIf="!hasfollowing" icon-small item-right name='md-trash' (click)="delete(post.id)"> </ion-icon>
+           <h5 id="profile-name">{{users.nickname}}</h5>
+            <p>{{post.date}}</p>
+          </ion-item>
+           <img *ngIf="post.image !== null" [src]="post.image" (click)="imageTapped(post.image)">
+          <ion-card-content>
+            <p *ngIf="post.content !== null">{{post.content}}</p>
+          </ion-card-content>
+          <ion-row>
+            <ion-col center text-center>
+              <h4 color="font1">
+                {{post.publishDateTime}}
+              </h4>
+            </ion-col>
+            <ion-col center text-center>
+              <button ion-button color="font1" clear small icon-left (click)="comment(post.id)">
+                  <ion-icon name='text'></ion-icon>
+                  {{post.messageNumber}} 评论
+                </button>
+            </ion-col>
+            <ion-col center text-center>
+              <button *ngIf="isLike !== post.id && hasLike " ion-button color="font1" clear small icon-left (click)="likeAdd(post)">
+                   <ion-icon name='thumbs-up'></ion-icon>
+                   {{post.likes}} 赞
+              </button>
+               <button *ngIf="isLike !== post.id && !hasLike " ion-button color="font1" clear small icon-left (click)="likeAdd(post)">
+                   <ion-icon name='thumbs-up'></ion-icon>
+                   {{post.likes}} 赞
+              </button>
+              <button  *ngIf="isLike == post.id && hasLike  " ion-button color="danger" clear small icon-left (click)="likesRe(post)">
+                   <ion-icon name='thumbs-up'></ion-icon>
+                  {{post.likes+1}} 赞
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
+  </div>
+</ion-content>

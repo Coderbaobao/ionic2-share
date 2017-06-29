@@ -1,0 +1,66 @@
+
+<ion-content>
+<div id="profile-bg" *ngIf="istheme" [ngStyle]="{'background-image': 'url(' + imageUrl_1 +')'}"></div>
+<div id="profile-bg" *ngIf="!istheme" [ngStyle]="{'background-image': 'url(' + imageUrl_2 +')'}"></div>
+  <div id="content">
+  <div id="profile-info" *ngIf="NOuser&&!hasLogon">
+    <img id="profile-image" src="{{NOuser.userpicture}}">
+    <h3  id="profile-name" (click)="openLogin()">{{NOuser.name}}</h3>
+    <ion-row class="profile-numbers">
+      <ion-col width-50>
+        <p>关注</p>
+        <span>{{NOuser.concern}}</span>
+      </ion-col>
+      <ion-col width-50>
+        <p>赞</p>
+        <span>{{NOuser.likes}}</span>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div id="profile-info" *ngIf="users&&hasLogon">
+    <img id="profile-image" src="{{users.userImage}}">
+    <h3  id="profile-name">{{users.nickname}}</h3>
+    <span id="profile-description">{{users.description}}</span>
+    <ion-row class="profile-numbers">
+      <ion-col width-50 >
+        <div (click)="goConcern(users.id)">      
+          <p>关注</p>
+          <span>{{users.concern}}</span>
+        </div>
+      </ion-col>
+      <ion-col width-50>
+        <p>赞</p>
+        <span>{{users.likes}}</span>
+      </ion-col>
+    </ion-row>
+  </div>
+  <br>
+    <hr>
+  <ion-row>
+    <ion-col width-33>
+      <button ion-button  clear [disabled]="!hasLogon" color="secondary" class="col-bu" icon-only (click)="userdetail(users.id)">
+          <ion-icon class="col-icon" name='ios-paper-outline' clear ><p>发表</p></ion-icon></button>
+    </ion-col>
+    <ion-col width-33>
+      <button ion-button clear color="danger" class="col-bu" icon-only (click)="changeTheme('theme-dark')" *ngIf="!istheme">
+           <ion-icon  class="col-icon" name='ios-moon-outline' clear  ><p>夜间</p></ion-icon></button>
+      <button ion-button clear color="danger" class="col-bu" icon-only (click)="changeTheme('')" *ngIf="istheme">
+           <ion-icon  class="col-icon" name='ios-sunny-outline' clear  ><p>日间</p></ion-icon></button>
+    </ion-col>
+    <ion-col width-33>
+      <button ion-button clear color="org" class="col-bu" icon-only (click)="openStting()">
+          <ion-icon class="col-icon" name='ios-settings' clear  ><p>设置</p></ion-icon></button>
+    </ion-col>
+  </ion-row>
+  <hr>
+  <ion-list *ngIf="!hasLogon">
+    <button ion-item (click)="openAbout()"><p>关于</p></button>
+  </ion-list>
+  <ion-list *ngIf="hasLogon">
+    <button ion-item (click)="accountManagement()"><p>帐号管理</p></button>
+    <button ion-item (click)="accountData()"><p>编辑用户资料</p></button>
+    <button ion-item (click)="openAbout()"><p>关于</p></button>
+  </ion-list>
+</div>
+</ion-content>
