@@ -29,6 +29,6 @@ ionic cordova build android
 
 
 ## 屏幕截图
-<img src="https://github.com/Coderbaobao/ionic2-share/blob/master/screenshot/dynamic.png?raw=true" width="280"/> 
-<img src="https://github.com/Coderbaobao/ionic2-share/blob/master/screenshot/chat.png?raw=true" width="280"/> 
-<img src="https://github.com/Coderbaobao/ionic2-share/blob/master/screenshot/Personal.png?raw=true" width="280"/> 
+<img src="https://github.com/Coderbaobao/ionic2-share/blob/master/screenshot/dynamic.png?raw=true" width="280"/> <img src="https://github.com/Coderbaobao/ionic2-share/blob/master/screenshot/chat.png?raw=true" width="280"/><img src="https://github.com/Coderbaobao/ionic2-share/blob/master/screenshot/Personal.png?raw=true" width="280"/>  
+
+
