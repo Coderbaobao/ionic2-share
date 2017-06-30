@@ -1,12 +1,12 @@
 # ionic2-share
 一个ionic2动态分享应用
-#安装依赖
+## 安装依赖
 npm install 
-#启服务调试
+## 启服务调试
 ionic serve
-#添加android平台
+## 添加android平台
 ionic cordova platform add android
-#编译项目apk
+## 编译项目apk
 ionic cordova build android
 
 ## 实现功能
